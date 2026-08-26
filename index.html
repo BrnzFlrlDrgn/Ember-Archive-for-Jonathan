@@ -1,0 +1,2421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The Ember Archive — A Cultural Gathering in Formation</title>
+  <meta
+    name="description"
+    content="The Ember Archive is a Houston cultural platform in formation—bringing art, hospitality, literature, music, film, and community together around what is good, true, and beautiful."
+  />
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Canva SDKs -->
+  <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ember-red: #d92f32;
+      --flame-orange: #ff681f;
+      --gold: #f8c93d;
+      --ink: #080808;
+      --archive-blue: #527a9c;
+      --pale-blue: #accdd2;
+      --paper: #f4efe4;
+      --paper-deep: #e9dfcf;
+      --cream: #fbf8f1;
+      --white: #ffffff;
+      --line: rgba(8, 8, 8, 0.22);
+      --muted: rgba(8, 8, 8, 0.64);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .serif {
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .paper {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,0,0,.025) 0 1px, transparent 1.2px),
+        radial-gradient(circle at 75% 70%, rgba(0,0,0,.02) 0 1px, transparent 1.2px),
+        var(--paper);
+      background-size: 9px 9px, 13px 13px;
+    }
+
+    .shell {
+      width: min(100% - 40px, 1320px);
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        width: min(100% - 72px, 1320px);
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 42px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+      opacity: .7;
+    }
+
+    .display-xl {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(4.5rem, 9.6vw, 9.8rem);
+      font-weight: 500;
+      line-height: .78;
+      letter-spacing: -.055em;
+    }
+
+    .display-lg {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.1rem, 6vw, 6.8rem);
+      font-weight: 500;
+      line-height: .88;
+      letter-spacing: -.045em;
+    }
+
+    .display-md {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 4vw, 4.4rem);
+      font-weight: 500;
+      line-height: .93;
+      letter-spacing: -.035em;
+    }
+
+    .display-sm {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      font-weight: 500;
+      line-height: .96;
+    }
+
+    .body-lg {
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      line-height: 1.9;
+    }
+
+    .body-md {
+      font-size: .98rem;
+      line-height: 1.8;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .fine-rule {
+      height: 1px;
+      background: currentColor;
+      opacity: .25;
+    }
+
+    .nav-link {
+      position: relative;
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-link::after {
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+      left: 0;
+      height: 1px;
+      content: "";
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .25s ease;
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      border: 1px solid var(--ink);
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease,
+        color .22s ease;
+    }
+
+    .button:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .button-dark {
+      color: white;
+      background: var(--ink);
+    }
+
+    .button-paper {
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .button-red {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    .button-gold {
+      color: var(--ink);
+      background: var(--gold);
+    }
+
+    .button-outline-light {
+      color: white;
+      border-color: rgba(255,255,255,.8);
+      background: transparent;
+    }
+
+    .button-outline-light:hover {
+      box-shadow: 5px 5px 0 white;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 68px);
+      overflow: hidden;
+      border-bottom: 1px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .hero-grid {
+      display: grid;
+      min-height: calc(100svh - 68px);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 980px) {
+      .hero-grid {
+        grid-template-columns: .9fr 1.1fr;
+      }
+    }
+
+    .hero-copy-panel {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 84px 20px 48px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-copy-panel {
+        padding-inline: 36px;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .hero-copy-panel {
+        padding-left: max(36px, calc((100vw - 1320px) / 2));
+        padding-right: 58px;
+      }
+    }
+
+    .hero-image-panel {
+      position: relative;
+      min-height: 56svh;
+      overflow: hidden;
+      border-top: 1px solid var(--ink);
+      background: var(--archive-blue);
+    }
+
+    @media (min-width: 980px) {
+      .hero-image-panel {
+        min-height: calc(100svh - 68px);
+        border-top: 0;
+        border-left: 1px solid var(--ink);
+      }
+    }
+
+    .hero-image-panel::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.06),
+          rgba(0,0,0,0) 40%,
+          rgba(0,0,0,.12)
+        );
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: contain;
+      background: var(--archive-blue);
+      filter: saturate(.88) contrast(.96);
+    }
+
+    .logo-frame {
+      display: inline-block;
+      width: 118px;
+      margin-bottom: 30px;
+      padding: 4px;
+      border: 1px solid var(--ink);
+      background: white;
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .art-notation {
+      position: absolute;
+      z-index: 4;
+      right: 20px;
+      bottom: 20px;
+      padding: 8px 10px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      background: rgba(244,239,228,.94);
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .glass-shape {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      border: 1px solid rgba(8,8,8,.72);
+    }
+
+    .glass-a {
+      top: 7%;
+      right: 8%;
+      width: 120px;
+      height: 180px;
+      border-radius: 100px 100px 0 0;
+      background: var(--pale-blue);
+      transform: rotate(11deg);
+    }
+
+    .glass-b {
+      right: 19%;
+      bottom: 8%;
+      width: 150px;
+      height: 150px;
+      border-radius: 100% 0 100% 0;
+      background: var(--gold);
+      transform: rotate(28deg);
+    }
+
+    .glass-c {
+      bottom: 13%;
+      left: -32px;
+      width: 90px;
+      height: 180px;
+      border-radius: 0 100% 100% 0;
+      background: var(--ember-red);
+    }
+
+    .section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    @media (min-width: 900px) {
+      .section {
+        padding: 132px 0;
+      }
+    }
+
+    .concept-grid {
+      display: grid;
+      gap: 42px;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .concept-grid {
+        grid-template-columns: .8fr 1.2fr;
+        gap: 90px;
+      }
+    }
+
+    .ecosystem {
+      display: grid;
+      margin-top: 42px;
+      border-top: 1px solid var(--ink);
+      border-left: 1px solid var(--ink);
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    @media (min-width: 700px) {
+      .ecosystem {
+        grid-template-columns: repeat(3, minmax(0,1fr));
+      }
+    }
+
+    .ecosystem > div {
+      display: flex;
+      min-height: 110px;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-right: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      text-align: center;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .ecosystem .center {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    .phase-grid {
+      display: grid;
+      margin-top: 72px;
+      border-top: 1px solid var(--ink);
+    }
+
+    @media (min-width: 900px) {
+      .phase-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .phase {
+      position: relative;
+      padding: 38px 0 44px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    @media (min-width: 900px) {
+      .phase {
+        min-height: 360px;
+        padding: 42px 40px;
+        border-right: 1px solid var(--ink);
+        border-bottom: 0;
+      }
+
+      .phase:first-child {
+        padding-left: 0;
+      }
+
+      .phase:last-child {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
+
+    .phase-number {
+      margin-bottom: 60px;
+      color: var(--ember-red);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.45rem;
+    }
+
+    .mobile-section {
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .mobile-lead {
+      display: grid;
+      gap: 54px;
+      align-items: end;
+    }
+
+    @media (min-width: 900px) {
+      .mobile-lead {
+        grid-template-columns: .92fr 1.08fr;
+        gap: 78px;
+      }
+    }
+
+    .concept-image {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid currentColor;
+      background: var(--archive-blue);
+    }
+
+    .concept-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--archive-blue);
+      transition: transform 1s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .concept-image:hover img {
+      transform: scale(1.035);
+    }
+
+    .concept-tag {
+      position: absolute;
+      z-index: 3;
+      bottom: 14px;
+      left: 14px;
+      padding: 7px 9px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      background: rgba(244,239,228,.94);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .mobile-gallery {
+      display: grid;
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 720px) {
+      .mobile-gallery {
+        grid-template-columns: 1.15fr .85fr;
+      }
+
+      .mobile-gallery .stack {
+        display: grid;
+        gap: 15px;
+        grid-template-rows: 1fr 1fr;
+      }
+    }
+
+    .experience-strip {
+      padding: 84px 0;
+      border-bottom: 1px solid var(--ink);
+      background: var(--gold);
+    }
+
+    .timeline {
+      display: grid;
+      margin-top: 56px;
+      border-top: 1px solid var(--ink);
+    }
+
+    @media (min-width: 860px) {
+      .timeline {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .moment {
+      padding: 26px 20px 28px 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    @media (min-width: 860px) {
+      .moment {
+        min-height: 230px;
+        padding: 26px 24px;
+        border-right: 1px solid var(--ink);
+        border-bottom: 0;
+      }
+
+      .moment:first-child {
+        padding-left: 0;
+      }
+
+      .moment:last-child {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
+
+    .moment-time {
+      font-size: .71rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .moment-title {
+      margin-top: 22px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .moment-copy {
+      margin-top: 14px;
+      font-size: .83rem;
+      line-height: 1.7;
+    }
+
+    .gathering-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 52px;
+    }
+
+    @media (min-width: 760px) {
+      .gathering-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .gathering-card {
+      display: flex;
+      min-height: 360px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid var(--ink);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .gathering-card:hover {
+      transform: translate(-5px,-5px);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    .gathering-card.red {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    .gathering-card.blue {
+      background: var(--pale-blue);
+    }
+
+    .gathering-card.orange {
+      background: var(--flame-orange);
+    }
+
+    .membership-section {
+      color: white;
+      background: var(--archive-blue);
+    }
+
+    .membership-intro {
+      max-width: 820px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .membership-grid {
+      display: grid;
+      gap: 0;
+      margin-top: 56px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+    }
+
+    @media (min-width: 820px) {
+      .membership-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .membership-card {
+      display: flex;
+      min-height: 330px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border-bottom: 1px solid var(--ink);
+      background: var(--paper);
+      transition: transform .25s ease;
+    }
+
+    @media (min-width: 820px) {
+      .membership-card {
+        border-right: 1px solid var(--ink);
+        border-bottom: 0;
+      }
+
+      .membership-card:last-child {
+        border-right: 0;
+      }
+    }
+
+    .membership-card:nth-child(2) {
+      background: var(--gold);
+    }
+
+    .membership-card:nth-child(3) {
+      background: var(--flame-orange);
+    }
+
+    .membership-card:nth-child(4) {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    .membership-card:hover {
+      transform: translateY(-9px);
+    }
+
+    .manifesto {
+      position: relative;
+      overflow: hidden;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .manifesto-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .manifesto-quote {
+      margin-top: 44px;
+      padding: 44px 0;
+      border-top: 1px solid rgba(255,255,255,.45);
+      border-bottom: 1px solid rgba(255,255,255,.45);
+    }
+
+    .future-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 52px;
+    }
+
+    @media (min-width: 880px) {
+      .future-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    .future-card {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--ink);
+      background: var(--cream);
+    }
+
+    @media (min-width: 560px) {
+      .future-card {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .future-card .copy {
+      display: flex;
+      min-height: 260px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .support-section {
+      color: white;
+      background: var(--ember-red);
+    }
+
+    .support-grid {
+      display: grid;
+      gap: 48px;
+    }
+
+    @media (min-width: 900px) {
+      .support-grid {
+        grid-template-columns: 1.05fr .95fr;
+        align-items: start;
+      }
+    }
+
+    .framework {
+      border: 1px solid white;
+    }
+
+    .framework-row {
+      display: grid;
+      gap: 8px;
+      padding: 19px 22px;
+      border-bottom: 1px solid rgba(255,255,255,.55);
+    }
+
+    .framework-row:last-child {
+      border-bottom: 0;
+    }
+
+    @media (min-width: 620px) {
+      .framework-row {
+        grid-template-columns: .72fr 1.28fr;
+      }
+    }
+
+    .framework dt {
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .framework dd {
+      margin: 0;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    .validation-grid {
+      display: grid;
+      margin-top: 48px;
+      border-top: 1px solid white;
+      border-left: 1px solid white;
+      grid-template-columns: repeat(2,1fr);
+    }
+
+    @media (min-width: 850px) {
+      .validation-grid {
+        grid-template-columns: repeat(5,1fr);
+      }
+    }
+
+    .validation-cell {
+      min-height: 116px;
+      padding: 17px;
+      border-right: 1px solid white;
+      border-bottom: 1px solid white;
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .validation-cell span {
+      display: block;
+      margin-top: 8px;
+      font-size: .73rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .journal-grid {
+      display: grid;
+      margin-top: 52px;
+      border-top: 1px solid var(--ink);
+    }
+
+    @media (min-width: 780px) {
+      .journal-grid {
+        grid-template-columns: repeat(3,1fr);
+      }
+    }
+
+    .journal-entry {
+      min-height: 270px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    @media (min-width: 780px) {
+      .journal-entry {
+        padding: 30px 30px;
+        border-right: 1px solid var(--ink);
+        border-bottom: 0;
+      }
+
+      .journal-entry:first-child {
+        padding-left: 0;
+      }
+
+      .journal-entry:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+    }
+
+    .signup-section {
+      background: var(--pale-blue);
+    }
+
+    .signup-grid {
+      display: grid;
+      gap: 50px;
+    }
+
+    @media (min-width: 900px) {
+      .signup-grid {
+        grid-template-columns: .78fr 1.22fr;
+      }
+    }
+
+    .signup-form {
+      padding: 30px;
+      border: 1px solid var(--ink);
+      background: var(--cream);
+      box-shadow: 9px 9px 0 var(--ink);
+    }
+
+    @media (min-width: 700px) {
+      .signup-form {
+        padding: 38px;
+      }
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    @media (min-width: 650px) {
+      .field-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    .field-wrap label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .field {
+      width: 100%;
+      padding: 10px 0;
+      border: 0;
+      border-bottom: 1px solid var(--ink);
+      outline: 0;
+      background: transparent;
+      font-size: .9rem;
+    }
+
+    .field:focus {
+      border-bottom: 2px solid var(--ember-red);
+    }
+
+    .interest-grid {
+      display: grid;
+      gap: 12px 20px;
+      margin-top: 15px;
+    }
+
+    @media (min-width: 650px) {
+      .interest-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    .interest {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      font-size: .83rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 60px 0 28px;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 50px;
+    }
+
+    @media (min-width: 780px) {
+      .footer-grid {
+        grid-template-columns: 1.2fr .7fr .8fr;
+      }
+    }
+
+    .footer-logo {
+      width: 90px;
+      padding: 4px;
+      border: 1px solid white;
+      background: white;
+    }
+
+    .footer-heading {
+      margin-bottom: 15px;
+      color: var(--gold);
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 9px;
+      font-size: .85rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity .8s cubic-bezier(.2,.7,.2,1),
+        transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .concept-image img,
+      .button,
+      .gathering-card,
+      .membership-card {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="paper">
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 border-b border-black bg-[#f4efe4]/95 backdrop-blur">
+    <div class="shell flex min-h-[68px] items-center justify-between gap-5">
+
+      <a href="#home" class="flex items-center gap-3">
+        <!-- Replace this image in Canva with the official Ember Archive logo -->
+        <img
+          data-template-id="official-nav-logo"
+          src="Images/Logo Pin00127929.png"
+          class="canva-image h-10 w-10 border border-black bg-white object-contain p-1"
+          alt="The Ember Archive logo"
+        />
+        <span class="serif text-[1.25rem] leading-[.85]">
+          The Ember<br />Archive
+        </span>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-7">
+        <a class="nav-link" href="#vision">Vision</a>
+        <a class="nav-link" href="#mobile">Mobile Archive</a>
+        <a class="nav-link" href="#gatherings">Gatherings</a>
+        <a class="nav-link" href="#membership">Membership</a>
+        <a class="nav-link" href="#collaborate">Collaborate</a>
+        <a class="nav-link" href="#support">Support</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#founding-list" class="button button-red hidden sm:inline-flex">
+          Join the Founding List
+        </a>
+
+        <button
+          id="menuButton"
+          class="grid h-10 w-10 place-items-center border border-black xl:hidden"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="mobileMenu"
+      class="mobile-menu flex-col gap-5 border-t border-black bg-[#f4efe4] px-6 py-7 xl:hidden"
+    >
+      <a class="nav-link" href="#vision">The Vision</a>
+      <a class="nav-link" href="#mobile">Mobile Archive</a>
+      <a class="nav-link" href="#gatherings">Gatherings</a>
+      <a class="nav-link" href="#membership">Membership</a>
+      <a class="nav-link" href="#collaborate">Artists & Partners</a>
+      <a class="nav-link" href="#support">Support the Archive</a>
+      <a class="button button-red w-fit" href="#founding-list">Join the Founding List</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+
+      <div class="glass-shape glass-a"></div>
+      <div class="glass-shape glass-b"></div>
+      <div class="glass-shape glass-c"></div>
+
+      <div class="hero-grid">
+
+        <div class="hero-copy-panel">
+          <div class="max-w-[700px]">
+
+            <p class="eyebrow mb-9">Houston, Texas · In Formation</p>
+
+            <!-- Replace in Canva with uploaded logo -->
+            <img
+              data-template-id="official-logo"
+              src="Images/Screenshot 2026-08-25 at 12.44.21 PM.png"
+              class="canva-image logo-frame"
+              alt="The Ember Archive"
+            />
+
+            <h1 class="display-xl">
+              A place for what is
+              <em class="font-normal">good, true,</em>
+              and beautiful.
+            </h1>
+
+            <p class="body-lg mt-9 max-w-[600px]">
+              The Ember Archive is a mobile cafe and library where craft and conversation builds community—beginning
+              in motion and growing toward a permanent home.
+            </p>
+
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a href="#vision" class="button button-dark">
+                Explore the Vision
+                <i data-lucide="arrow-down-right" class="h-4 w-4"></i>
+              </a>
+
+              <a href="#founding-list" class="button button-paper">
+                Join Early
+              </a>
+            </div>
+
+            <p class="mt-7 max-w-[460px] text-[.72rem] leading-5 text-black/55">
+              The Ember Archive is currently in development. Visuals shown
+              throughout this site represent proposed experiences and concept studies.
+            </p>
+
+          </div>
+        </div>
+
+        <div class="hero-image-panel">
+          <!-- Replace in Canva with watercolor concept rendering of bus at dusk -->
+          <img
+            data-template-id="hero-concept-image"
+            src="Images/Hero-Bus.png"
+            class="canva-image hero-image"
+            alt="Concept rendering of the Mobile Ember Archive at dusk"
+          />
+          <span class="art-notation">Concept Rendering · Mobile Archive</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- IDEA -->
+    <section id="vision" class="section bg-[#accdd2]">
+      <div class="shell">
+
+        <div class="concept-grid">
+
+          <div class="reveal">
+            <p class="eyebrow">The Idea</p>
+
+            <h2 class="display-lg mt-7">
+              More than a place.
+              <em>An ecosystem.</em>
+            </h2>
+          </div>
+
+          <div class="reveal">
+            <p class="body-lg max-w-[700px]">
+              The Ember Archive is being built around a simple conviction:
+              meaningful culture is not merely something we consume. It is
+              something we discover, share, and make together.
+            </p>
+
+            <p class="body-md mt-6 max-w-[700px]">
+              Coffee can lead to conversation. A book can lead to an idea.
+              An idea can lead to creation. Sharing that creation leads to culture. The Archive brings those things into relationship
+              with one another rather than treating them as separate experiences.
+            </p>
+
+            <div class="ecosystem">
+              <div>Art</div>
+              <div>Hospitality</div>
+              <div>Culture</div>
+              <div>Community</div>
+              <div class="center">The Ember Archive</div>
+              <div>Contemplation</div>
+            </div>
+
+            <p class="mt-4 text-right text-[.67rem] font-bold uppercase tracking-[.13em]">
+              Collaboration binds all of it.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHASES -->
+    <section class="section">
+      <div class="shell">
+
+        <div class="grid gap-8 lg:grid-cols-[1fr_.7fr] lg:items-end">
+          <div class="reveal">
+            <p class="eyebrow">The Path Forward</p>
+            <h2 class="display-lg mt-7">
+              From ember<br />
+              to hearth.
+            </h2>
+          </div>
+
+          <p class="body-md muted reveal">
+            The permanent Archive is not the first chapter. We are deliberately
+            building the community, programming, identity, and proof of concept
+            before putting down permanent roots.
+          </p>
+        </div>
+
+        <div class="phase-grid">
+
+          <article class="phase reveal">
+            <div class="phase-number">01</div>
+            <h3 class="display-sm">Gather</h3>
+            <p class="body-md mt-6">
+              Intimate events, performances, artist collaborations, conversations,
+              film, music, hospitality, and shared cultural experiences.
+            </p>
+            <p class="mt-8 text-[.66rem] font-bold uppercase tracking-[.12em]">
+              Community before property
+            </p>
+          </article>
+
+          <article class="phase reveal">
+            <div class="phase-number">02</div>
+            <h3 class="display-sm">Go Mobile</h3>
+            <p class="body-md mt-6">
+              A converted double-decker bus becomes a traveling café, library,
+              and anchor for outdoor movie showings and live performances.
+            </p>
+            <p class="mt-8 text-[.66rem] font-bold uppercase tracking-[.12em]">
+              Proof before permanence
+            </p>
+          </article>
+
+          <article class="phase reveal">
+            <div class="phase-number">03</div>
+            <h3 class="display-sm">Put Down Roots</h3>
+            <p class="body-md mt-6">
+              A permanent cultural home brings together Bloomkeeper's Café,
+              the Archive Library, The Garden, The Hearth event space, curated works,
+              and daily hospitality.
+            </p>
+            <p class="mt-8 text-[.66rem] font-bold uppercase tracking-[.12em]">
+              A lasting cultural place
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MOBILE ARCHIVE -->
+    <section id="mobile" class="section mobile-section">
+      <div class="shell">
+
+        <div class="mobile-lead">
+
+          <div class="reveal">
+            <p class="eyebrow text-[#f8c93d]">The Next Physical Chapter</p>
+
+            <h2 class="display-lg mt-8">
+              The Archive<br />
+              takes to the road.
+            </h2>
+
+            <p class="body-lg mt-8 max-w-[610px] text-white/78">
+              The Mobile Ember Archive transforms a double-decker bus into
+              a small cultural world: coffee, books, and gathering around
+              film and music—all able to move throughout Houston.
+            </p>
+
+            <p class="body-md mt-6 max-w-[600px] text-white/65">
+              Mobility is not simply a temporary substitute for a building.
+              It gives the Archive a way to cultivate an audience, develop partnerships, and demonstrate
+              demand for a growing culture around what's real.
+            </p>
+
+            <a href="#founding-list" class="button button-gold mt-9">
+              Follow the Build
+              <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </div>
+
+          <div class="concept-image reveal h-[460px] lg:h-[610px]">
+            <!-- Replace with bus exterior watercolor -->
+            <img
+              data-template-id="bus-exterior-image"
+              src="Images/Bus-Exterior.png"
+              class="canva-image"
+              alt="Concept rendering of the Mobile Ember Archive bus"
+            />
+            <span class="concept-tag">Exterior Vision Study</span>
+          </div>
+
+        </div>
+
+        <div class="mobile-gallery">
+
+          <div class="concept-image h-[510px]">
+            <!-- Replace with cafe/bar interior watercolor -->
+            <img
+              data-template-id="mobile-cafe-image"
+              src="Images/Cafe-Interior.png"
+              class="canva-image"
+              alt="Concept study of the lower-deck café"
+            />
+            <span class="concept-tag">Lower Deck · Café + Hospitality</span>
+          </div>
+
+          <div class="stack">
+            <div class="concept-image min-h-[245px]">
+              <!-- Replace with library watercolor -->
+              <img
+                data-template-id="mobile-library-image"
+                src="Images/Library-Reading-Room.png"
+                class="canva-image"
+                alt="Concept study of the upper-deck reading lounge"
+              />
+              <span class="concept-tag">Upper Deck · Reading Lounge</span>
+            </div>
+
+            <div class="concept-image min-h-[245px]">
+              <!-- Replace with outdoor cinema -->
+              <img
+                data-template-id="mobile-cinema-image"
+                src="Images/ChatGPT Image Aug 25, 2026, 08_12_23 PM.png"
+                class="canva-image"
+                alt="Concept rendering of an outdoor Ember cinema"
+              />
+              <span class="concept-tag">Mobile Drive-In Theater + Gathering</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience-strip">
+      <div class="shell">
+
+        <p class="eyebrow">Imagine an Evening</p>
+
+        <h2 class="display-md mt-7 max-w-[900px]">
+          Not just somewhere to go.
+          <em>Something to enter into.</em>
+        </h2>
+
+        <div class="timeline">
+
+          <article class="moment">
+            <p class="moment-time">5:42 PM</p>
+            <h3 class="moment-title">Arrive</h3>
+            <p class="moment-copy">
+              The bus is glowing as Houston's late light begins to soften.
+            </p>
+          </article>
+
+          <article class="moment">
+            <p class="moment-time">6:10 PM</p>
+            <h3 class="moment-title">Gather</h3>
+            <p class="moment-copy">
+              Coffee, small bites, shelves worth browsing, and conversation
+              without needing an agenda.
+            </p>
+          </article>
+
+          <article class="moment">
+            <p class="moment-time">7:00 PM</p>
+            <h3 class="moment-title">Encounter</h3>
+            <p class="moment-copy">
+              An artist showcases something
+              they have made.
+            </p>
+          </article>
+
+          <article class="moment">
+            <p class="moment-time">8:15 PM</p>
+            <h3 class="moment-title">Watch</h3>
+            <p class="moment-copy">
+              A screen illuminates outdoors and a temporary room forms beneath
+              the open sky.
+            </p>
+          </article>
+
+          <article class="moment">
+            <p class="moment-time">10:03 PM</p>
+            <h3 class="moment-title">Linger</h3>
+            <p class="moment-copy">
+              The program ends. The conversation it made possible does not.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GATHERINGS -->
+    <section id="gatherings" class="section">
+      <div class="shell">
+
+        <div class="grid gap-9 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div class="reveal">
+            <p class="eyebrow">Ember Gatherings</p>
+            <h2 class="display-lg mt-7">
+              Culture is meant
+              to be shared.
+            </h2>
+          </div>
+
+          <div class="reveal">
+            <p class="body-lg max-w-[690px]">
+              Before the bus. Before the building. The Archive begins by gathering.
+            </p>
+
+            <p class="body-md muted mt-5 max-w-[690px]">
+              Ember Gatherings bring musicians, artists, filmmakers,
+              local organizations, and
+              hospitality into intentionally curated evenings.
+            </p>
+          </div>
+        </div>
+
+        <div class="gathering-grid">
+
+          <article class="gathering-card blue reveal">
+            <p class="text-[.65rem] font-bold uppercase tracking-[.13em]">
+              Gathering Format 01
+            </p>
+
+            <div>
+              <h3 class="display-sm">
+                Music<br />after dusk.
+              </h3>
+
+              <p class="body-md mt-5">
+                Intimate performances where the room is small enough for artist
+                and audience to truly encounter one another.
+              </p>
+            </div>
+          </article>
+
+          <article class="gathering-card orange reveal">
+            <p class="text-[.65rem] font-bold uppercase tracking-[.13em]">
+              Gathering Format 02
+            </p>
+
+            <div>
+              <h3 class="display-sm">
+                Film under<br />open sky.
+              </h3>
+
+              <p class="body-md mt-5">
+                Curated cinema paired with food, contextual notes,
+                and a shared evening rather than simple screening.
+              </p>
+            </div>
+          </article>
+
+          <article class="gathering-card red reveal">
+            <p class="text-[.65rem] font-bold uppercase tracking-[.13em]">
+              Gathering Format 03
+            </p>
+
+            <div>
+              <h3 class="display-sm">
+                Artists<br />at the table.
+              </h3>
+
+              <p class="body-md mt-5 text-white/88">
+                Exhibitions, demonstrations, readings, and
+                collaborative experiences centered around meaningful work.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#founding-list" class="button button-dark">
+            Hear About Future Gatherings
+          </a>
+
+          <a href="#collaborate" class="button button-paper">
+            Collaborate With Us
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MEMBERSHIP -->
+    <section id="membership" class="section membership-section">
+      <div class="shell">
+
+        <div class="membership-intro reveal">
+          <p class="eyebrow justify-center text-[#f8c93d]">
+            Founding Membership
+          </p>
+
+          <h2 class="display-lg mt-8">
+            Help build<br />
+            <em>the hearth.</em>
+          </h2>
+
+          <p class="body-lg mt-7 text-white/80">
+            Membership is envisioned as a way to belong to the Archive—not
+            merely to receive discounts from it.
+          </p>
+
+          <p class="body-md mt-5 text-white/65">
+            Members will help form the earliest community around the
+            Archive while receiving access to experiences, invitations,
+            discoveries, and future benefits as the project grows.
+          </p>
+        </div>
+
+        <div class="membership-grid">
+
+          <article class="membership-card">
+            <div>
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Entry Circle
+              </p>
+              <h3 class="display-sm mt-6">Seed</h3>
+            </div>
+
+            <p class="body-md mt-8">
+              For those who want to follow the project closely, attend gatherings,
+              and participate in its earliest community.
+            </p>
+          </article>
+
+          <article class="membership-card">
+            <div>
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Founding Community
+              </p>
+              <h3 class="display-sm mt-6">Sprout</h3>
+            </div>
+
+            <p class="body-md mt-8">
+              Priority gathering access, member experiences, early announcements,
+              and recognition as part of the Archive's community.
+            </p>
+          </article>
+
+          <article class="membership-card">
+            <div>
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Founding Circle
+              </p>
+              <h3 class="display-sm mt-6">Kindler</h3>
+            </div>
+
+            <p class="body-md mt-8">
+              A deeper level of support designed for those who want to help
+              underwrite programming, artists, and the growth of the Archive.
+            </p>
+          </article>
+
+          <article class="membership-card">
+            <div>
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Early Benefactors
+              </p>
+              <h3 class="display-sm mt-6">Emberborne</h3>
+            </div>
+
+            <p class="body-md mt-8 text-white/88">
+              A future limited circle for early supporters helping establish
+              the physical Archive and its long-term cultural work.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="mt-9 text-center">
+          <p class="mb-5 text-[.7rem] uppercase tracking-[.12em] text-white/70">
+            Membership structure and pricing are currently in development.
+          </p>
+
+          <a href="#founding-list" class="button button-paper">
+            Express Membership Interest
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLLABORATORS -->
+    <section id="collaborate" class="section">
+      <div class="shell">
+
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+
+          <div class="concept-image h-[520px] reveal">
+            <!-- Replace with artist/creative gathering visual -->
+            <img
+              data-template-id="artist-collaboration-image"
+              src="Images/ChatGPT Image Aug 25, 2026, 08_40_27 PM.png"
+              class="canva-image"
+              alt="Artists and collaborators gathered around creative work"
+            />
+            <span class="concept-tag">Artists + Collaborators</span>
+          </div>
+
+          <div class="reveal">
+            <p class="eyebrow">Create With the Archive</p>
+
+            <h2 class="display-lg mt-7">
+              An Archive should contain
+              <em>living voices.</em>
+            </h2>
+
+            <p class="body-lg mt-8">
+              The Ember Archive is being built in relationship with local artists,
+              cultural organizations,
+              nonprofits, businesses, and people doing meaningful work.
+            </p>
+
+            <p class="body-md muted mt-6">
+              Collaboration may take the form of performance, exhibition,
+              event programming, hosting, product collaboration,
+              or something we have not imagined yet.
+            </p>
+
+            <a href="#founding-list" class="button button-dark mt-8">
+              Become a Collaborator
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="section manifesto">
+      <div class="shell">
+
+        <div class="manifesto-inner reveal">
+
+          <p class="eyebrow justify-center text-[#f8c93d]">
+            Why This Should Exist
+          </p>
+
+          <h2 class="display-lg mt-9">
+            We have more ways to connect than ever.
+            <br />
+            <em>And fewer places to truly gather.</em>
+          </h2>
+
+          <p class="body-lg mx-auto mt-10 max-w-[780px] text-white/75">
+            The Ember Archive is an attempt to cultivate a physical culture of
+            real human interaction: a place where people can slow down, encounter meaningful
+            work, share a table, discover something beautiful, and participate
+            rather than merely scroll past.
+          </p>
+
+          <p class="body-md mx-auto mt-6 max-w-[720px] text-white/58">
+            Its deepest conviction is that goodness, truth, and beauty are not
+            decorative ideas. They shape what we make, what we preserve, how we
+            welcome one another, and the kind of culture we leave behind.
+          </p>
+
+          <div class="manifesto-quote">
+            <p class="serif text-[clamp(2.1rem,4vw,4rem)] italic leading-[1.05]">
+              Some things are worth preserving.<br />
+              Some things are worth experiencing.<br />
+              Some things are worth gathering around.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FUTURE ARCHIVE -->
+    <section class="section">
+      <div class="shell">
+
+        <p class="eyebrow">The Long-Term Vision</p>
+
+        <h2 class="display-lg mt-7 max-w-[900px]">
+          One day, the Archive
+          <em>puts down roots.</em>
+        </h2>
+
+        <p class="body-lg mt-8 max-w-[730px]">
+          The permanent Ember Archive is envisioned as a cultural home in which
+          hospitality, art, nature, books, performance, and community are
+          experienced as parts of one whole.
+        </p>
+
+        <div class="future-grid">
+
+          <article class="future-card reveal">
+
+            <div class="concept-image min-h-[280px]">
+              <img
+                data-template-id="future-cafe-image"
+                src="Images/ChatGPT Image Aug 25, 2026, 08_21_07 PM.png"
+                class="canva-image"
+                alt="Concept study for Bloomkeeper's Café"
+              />
+              <span class="concept-tag">Vision Study</span>
+            </div>
+
+            <div class="copy">
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Hospitality
+              </p>
+
+              <h3 class="display-sm mt-4">
+                Bloomkeeper's Café
+              </h3>
+
+              <p class="body-md mt-5">
+                A literary café by day and intimate hospitality room by evening,
+                built around thoughtful drinks, food, and gathering.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="future-card reveal">
+
+            <div class="concept-image min-h-[280px]">
+              <img
+                data-template-id="future-library-image"
+                src="Images/ChatGPT Image Aug 25, 2026, 08_13_41 PM.png"
+                class="canva-image"
+                alt="Concept study for the Archive Library"
+              />
+              <span class="concept-tag">Vision Study</span>
+            </div>
+
+            <div class="copy">
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Preservation
+              </p>
+
+              <h3 class="display-sm mt-4">
+                The Archive
+              </h3>
+
+              <p class="body-md mt-5">
+                A curated collection of written, visual, and auditory works
+                intended for discovery and conversation.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="future-card reveal">
+
+            <div class="concept-image min-h-[280px]">
+              <img
+                data-template-id="future-garden-image"
+                src="Images/ChatGPT Image Aug 25, 2026, 08_21_18 PM.png"
+                class="canva-image"
+                alt="Concept study for the Ember Archive garden"
+              />
+              <span class="concept-tag">Vision Study</span>
+            </div>
+
+            <div class="copy">
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Cultivation
+              </p>
+
+              <h3 class="display-sm mt-4">
+                The Garden
+              </h3>
+
+              <p class="body-md mt-5">
+                A living collection and quiet place for
+                contemplation, botanical works, changing seasons, and beauty.
+              </p>
+            </div>
+
+          </article>
+
+          <article class="future-card reveal">
+
+            <div class="concept-image min-h-[280px]">
+              <img
+                data-template-id="future-stage-image"
+                src="Images/ChatGPT Image Aug 25, 2026, 08_20_59 PM.png"
+                class="canva-image"
+                alt="Concept study for the Ember Archive performance space"
+              />
+              <span class="concept-tag">Vision Study</span>
+            </div>
+
+            <div class="copy">
+              <p class="text-[.63rem] font-bold uppercase tracking-[.12em]">
+                Expression
+              </p>
+
+              <h3 class="display-sm mt-4">
+                The Hearth Stage
+              </h3>
+
+              <p class="body-md mt-5">
+                An intimate home for musicians, filmmakers, artists, and shared cultural moments.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FUNDERS / SUPPORT -->
+    <section id="support" class="section support-section">
+      <div class="shell">
+
+        <div class="support-grid">
+
+          <div class="reveal">
+            <p class="eyebrow">Partners · Funders · Supporters</p>
+
+            <h2 class="display-lg mt-8">
+              Help us build
+              <em>what comes next.</em>
+            </h2>
+
+            <p class="body-lg mt-8 max-w-[680px] text-white/85">
+              The Mobile Ember Archive is designed to create a lower-overhead,
+              highly visible first physical expression of the larger vision.
+            </p>
+
+            <p class="body-md mt-6 max-w-[680px] text-white/72">
+              We are seeking relationships with grantmakers, cultural organizations,
+              businesses, sponsors, community partners, venues, artists, and
+              early supporters interested in helping establish a meaningful
+              new cultural gathering place in Houston.
+            </p>
+
+            <div class="mt-9 flex flex-wrap gap-3">
+              <a href="#founding-list" class="button button-paper">
+                Partner With the Archive
+              </a>
+
+              <a
+                href="mailto:hello@emberarchive.community?subject=Ember%20Archive%20Project%20Overview"
+                class="button button-outline-light"
+              >
+                Request Project Overview
+              </a>
+            </div>
+          </div>
+
+          <dl class="framework reveal">
+
+            <div class="framework-row">
+              <dt>Current Stage</dt>
+              <dd>
+                Concept development, market research, community building,
+                creative partnerships, and early programming.
+              </dd>
+            </div>
+
+            <div class="framework-row">
+              <dt>Initial Activity</dt>
+              <dd>
+                Ember Gatherings, artist collaborations, audience development,
+                partnerships, and proof-of-concept experiences.
+              </dd>
+            </div>
+
+            <div class="framework-row">
+              <dt>Next Capital Objective</dt>
+              <dd>
+                Acquire, design, fabricate, equip, and launch the Mobile Ember Archive.
+              </dd>
+            </div>
+
+            <div class="framework-row">
+              <dt>What Mobile Validates</dt>
+              <dd>
+                Demand, programming, membership interest, hospitality operations,
+                partnerships, earned revenue, and audience growth.
+              </dd>
+            </div>
+
+            <div class="framework-row">
+              <dt>Long-Term Objective</dt>
+              <dd>
+                Establish a permanent Ember Archive integrating café, library,
+                garden, performance, art, and community.
+              </dd>
+            </div>
+
+          </dl>
+
+        </div>
+
+        <div class="validation-grid">
+
+          <div class="validation-cell">
+            Founding List
+            <span>Data gathering in progress</span>
+          </div>
+
+          <div class="validation-cell">
+            Event Attendance
+            <span>To be measured</span>
+          </div>
+
+          <div class="validation-cell">
+            Membership Interest
+            <span>To be validated</span>
+          </div>
+
+          <div class="validation-cell">
+            Partnerships
+            <span>In development</span>
+          </div>
+
+          <div class="validation-cell">
+            Capital Raised
+            <span>Future reporting</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BUILD JOURNAL -->
+    <section class="section">
+      <div class="shell">
+
+        <div class="grid gap-8 lg:grid-cols-[1fr_.75fr] lg:items-end">
+
+          <div>
+            <p class="eyebrow">The Build Journal</p>
+            <h2 class="display-lg mt-7">
+              Watch an ember
+              <em>become a hearth.</em>
+            </h2>
+          </div>
+
+          <p class="body-md muted">
+            The project will be documented openly through our social media pages and you'll be able to witness the collaborations, progressions, and decisions that help the Ember Archive evolve.
+          </p>
+
+        </div>
+
+        <div class="journal-grid">
+
+          <article class="journal-entry reveal">
+            <p class="text-[.64rem] font-bold uppercase tracking-[.12em] text-[#d92f32]">
+              01 · Development
+            </p>
+
+            <h3 class="display-sm mt-8">
+              The first drawings
+            </h3>
+
+            <p class="body-md mt-5">
+              Architectural sketches, visual references, early concepts,
+              and the evolving shape of the mobile Archive.
+            </p>
+          </article>
+
+          <article class="journal-entry reveal">
+            <p class="text-[.64rem] font-bold uppercase tracking-[.12em] text-[#d92f32]">
+              02 · Field Notes
+            </p>
+
+            <h3 class="display-sm mt-8">
+              Gathering in the city
+            </h3>
+
+            <p class="body-md mt-5">
+              Notes from Ember Gatherings, local artists, collaborators,
+              potential partners, and the people shaping the project.
+            </p>
+          </article>
+
+          <article class="journal-entry reveal">
+            <p class="text-[.64rem] font-bold uppercase tracking-[.12em] text-[#d92f32]">
+              03 · Build Log
+            </p>
+
+            <h3 class="display-sm mt-8">
+              The Archive takes form
+            </h3>
+
+            <p class="body-md mt-5">
+              Bus acquisition, design development, fabrication, equipment,
+              fundraising milestones, testing, and launch.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOUNDING LIST -->
+    <section id="founding-list" class="section signup-section">
+      <div class="shell">
+
+        <div class="signup-grid">
+
+          <div class="reveal">
+            <p class="eyebrow">Join Early</p>
+
+            <h2 class="display-lg mt-7">
+              Be here before
+              <em>there is a here.</em>
+            </h2>
+
+            <p class="body-lg mt-8">
+              Join the Founding List to follow the build, hear about Ember
+              Gatherings, discover collaborating artists, and receive early
+              access to founding membership when it opens.
+            </p>
+
+            <p class="body-md muted mt-6">
+              Whether you want to attend, create, partner, fund, volunteer,
+              or simply watch the idea become real, there is room to enter early.
+            </p>
+          </div>
+
+          <form id="foundingForm" class="signup-form reveal">
+
+            <div class="field-grid">
+
+              <div class="field-wrap">
+                <label for="firstName">First Name</label>
+                <input id="firstName" class="field" type="text" required />
+              </div>
+
+              <div class="field-wrap">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" class="field" type="text" required />
+              </div>
+
+              <div class="field-wrap">
+                <label for="email">Email</label>
+                <input id="email" class="field" type="email" required />
+              </div>
+
+              <div class="field-wrap">
+                <label for="zip">ZIP Code</label>
+                <input
+                  id="zip"
+                  class="field"
+                  type="text"
+                  inputmode="numeric"
+                  pattern="[0-9]{5}"
+                />
+              </div>
+
+            </div>
+
+            <fieldset class="mt-9">
+
+              <legend class="text-[.64rem] font-bold uppercase tracking-[.12em]">
+                What are you interested in?
+              </legend>
+
+              <div class="interest-grid">
+
+                <label class="interest">
+                  <input type="checkbox" value="Attend an Ember Gathering" />
+                  <span>Attend an Ember Gathering</span>
+                </label>
+
+                <label class="interest">
+                  <input type="checkbox" value="Founding Membership" />
+                  <span>Founding Membership</span>
+                </label>
+
+                <label class="interest">
+                  <input type="checkbox" value="Artist Collaboration" />
+                  <span>Artist / Creative Collaboration</span>
+                </label>
+
+                <label class="interest">
+                  <input type="checkbox" value="Business Partnership" />
+                  <span>Business / Venue Partnership</span>
+                </label>
+
+                <label class="interest">
+                  <input type="checkbox" value="Funding or Sponsorship" />
+                  <span>Funding / Sponsorship</span>
+                </label>
+
+                <label class="interest">
+                  <input type="checkbox" value="Volunteer or Contribute" />
+                  <span>Volunteer / Contribute</span>
+                </label>
+
+              </div>
+
+            </fieldset>
+
+            <div class="mt-9 flex flex-wrap items-center gap-5">
+
+              <button
+                id="submitButton"
+                type="submit"
+                class="button button-dark"
+              >
+                Join the Founding List
+                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+              </button>
+
+              <p
+                id="formStatus"
+                class="max-w-[310px] text-[.8rem] leading-5"
+                aria-live="polite"
+              ></p>
+
+            </div>
+
+            <p class="mt-7 text-[.67rem] leading-5 text-black/52">
+              No manufactured urgency. No inbox flooding. Just meaningful
+              updates as the Archive becomes real.
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="shell">
+
+      <div class="footer-grid">
+
+        <div>
+          <!-- Replace with uploaded logo -->
+          <img
+            data-template-id="footer-logo"
+            src="Images/Screenshot 2026-08-25 at 12.59.35 PM.png"
+            class="canva-image footer-logo"
+            alt="The Ember Archive"
+          />
+
+          <p class="serif mt-6 max-w-[360px] text-[1.8rem] leading-[1.05]">
+            Cultivating what is good,
+            true, and beautiful.
+          </p>
+
+          <p class="mt-5 text-sm text-white/65">
+            Houston, Texas
+          </p>
+        </div>
+
+        <div>
+          <p class="footer-heading">Explore</p>
+
+          <div class="footer-links">
+            <a href="#vision">The Vision</a>
+            <a href="#mobile">Mobile Archive</a>
+            <a href="#gatherings">Gatherings</a>
+            <a href="#membership">Membership</a>
+            <a href="#collaborate">Artists & Partners</a>
+            <a href="#support">Support the Archive</a>
+          </div>
+        </div>
+
+        <div>
+          <p class="footer-heading">Correspondence</p>
+
+          <div class="footer-links">
+            <a href="mailto:hello@emberarchive.community">
+              hello@emberarchive.community
+            </a>
+
+            <a href="#founding-list">
+              Join the Founding List
+            </a>
+
+            <span class="text-white/55">
+              Instagram · YouTube · Journal
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-14 flex flex-wrap justify-between gap-5 border-t border-white/25 pt-6 text-[.68rem] text-white/48">
+        <span>© The Ember Archive</span>
+        <span>
+          A cultural place in formation.
+        </span>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // Initialize icons
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Mobile navigation
+      const menuButton = document.getElementById("menuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      if (menuButton && mobileMenu) {
+        menuButton.addEventListener("click", () => {
+          const isOpen = mobileMenu.classList.toggle("open");
+          menuButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        mobileMenu.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+            menuButton.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      // Scroll reveal
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        revealElements.forEach(element => observer.observe(element));
+      } else {
+        revealElements.forEach(element => element.classList.add("visible"));
+      }
+
+      // Founding list form
+      const form = document.getElementById("foundingForm");
+      const formStatus = document.getElementById("formStatus");
+      const submitButton = document.getElementById("submitButton");
+
+      let recordCount = 0;
+      let dataConnected = false;
+
+      async function initializeDataSdk() {
+        if (!window.dataSdk) {
+          console.warn("Canva Data SDK not available.");
+          return;
+        }
+
+        try {
+          const result = await window.dataSdk.init({
+            onDataChanged(data) {
+              recordCount = Array.isArray(data) ? data.length : 0;
+            }
+          });
+
+          dataConnected = !!result?.isOk;
+
+        } catch (error) {
+          console.warn("Could not initialize Canva Data SDK.", error);
+        }
+      }
+
+      initializeDataSdk();
+
+      if (form) {
+        form.addEventListener("submit", async event => {
+          event.preventDefault();
+
+          const firstName = document.getElementById("firstName").value.trim();
+          const lastName = document.getElementById("lastName").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const zip = document.getElementById("zip").value.trim();
+
+          const selectedInterests = [
+            ...form.querySelectorAll('input[type="checkbox"]:checked')
+          ].map(input => input.value);
+
+          if (!email) {
+            formStatus.textContent = "Please enter your email address.";
+            return;
+          }
+
+          if (recordCount >= 999) {
+            formStatus.textContent =
+              "The current Founding List is full. Please contact the Archive directly.";
+            return;
+          }
+
+          submitButton.disabled = true;
+          submitButton.style.opacity = ".55";
+          formStatus.textContent = "Joining the Founding List…";
+
+          const record = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            zip_code: zip,
+            interests:
+              selectedInterests.length > 0
+                ? selectedInterests.join(", ")
+                : "Follow the Project",
+            submitted_at: new Date().toISOString()
+          };
+
+          try {
+
+            if (window.dataSdk && dataConnected) {
+
+              const result = await window.dataSdk.create(record);
+
+              if (!result?.isOk) {
+                throw new Error("Data SDK could not save submission.");
+              }
+
+            } else {
+              console.log("Founding List submission:", record);
+            }
+
+            form.reset();
+
+            formStatus.textContent =
+              "Welcome to the Founding List. You'll hear from the Archive as the next chapter takes form.";
+
+          } catch (error) {
+
+            console.error(error);
+
+            formStatus.textContent =
+              "We couldn't save your interest just now. Please try again or contact hello@emberarchive.community.";
+
+          } finally {
+
+            submitButton.disabled = false;
+            submitButton.style.opacity = "1";
+
+          }
+        });
+      }
+
+    });
+  </script>
+
+</body>
+</html>
