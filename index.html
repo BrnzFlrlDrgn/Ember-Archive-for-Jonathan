@@ -329,6 +329,35 @@
       filter: saturate(.88) contrast(.96);
     }
 
+        /* Decorative botanical artwork around the hero bus.
+       Add a transparent PNG/WebP at Images/Hero-Floral.png. */
+    .hero-floral {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      width: clamp(260px, 60%, 760px);
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+      object-fit: contain;
+    }
+
+    .hero-floral-top {
+      top: -18%;
+      transform: translateX(-50%) rotate(90deg);
+    }
+
+    .hero-floral-bottom {
+      bottom: -18%;
+      transform: translateX(-50%) rotate(270deg);
+    }
+
+    @media (max-width: 979px) {
+      .hero-floral {
+        width: min(86%, 620px);
+      }
+    }
+
     .logo-frame {
       display: inline-block;
       width: 118px;
@@ -1172,12 +1201,29 @@
         </div>
 
         <div class="hero-image-panel">
+
+                    <img
+            src="Images/Hero-Floral.png"
+            class="hero-floral hero-floral-top"
+            alt=""
+            aria-hidden="true"
+            onerror="this.style.display='none'"
+          />
+
           <!-- Replace in Canva with watercolor concept rendering of bus at dusk -->
           <img
             data-template-id="hero-concept-image"
             src="Images/Hero-Bus.png"
             class="canva-image hero-image"
             alt="Concept rendering of the Mobile Ember Archive at dusk"
+          />
+
+                    <img
+            src="Images/Hero-Floral.png"
+            class="hero-floral hero-floral-bottom"
+            alt=""
+            aria-hidden="true"
+            onerror="this.style.display='none'"
           />
           <span class="art-notation">Concept Rendering · Mobile Archive</span>
         </div>
@@ -2080,7 +2126,11 @@
             </p>
           </div>
 
-          <form id="foundingForm" class="signup-form reveal">
+          <form id="foundingForm" 
+                class="signup-form reveal"
+                action="https://formspree.io/f/xaeywoqk"
+                method="POST"
+                >
 
             <div class="field-grid">
 
@@ -2309,31 +2359,7 @@
       const form = document.getElementById("foundingForm");
       const formStatus = document.getElementById("formStatus");
       const submitButton = document.getElementById("submitButton");
-
-      let recordCount = 0;
-      let dataConnected = false;
-
-      async function initializeDataSdk() {
-        if (!window.dataSdk) {
-          console.warn("Canva Data SDK not available.");
-          return;
-        }
-
-        try {
-          const result = await window.dataSdk.init({
-            onDataChanged(data) {
-              recordCount = Array.isArray(data) ? data.length : 0;
-            }
-          });
-
-          dataConnected = !!result?.isOk;
-
-        } catch (error) {
-          console.warn("Could not initialize Canva Data SDK.", error);
-        }
-      }
-
-      initializeDataSdk();
+      const foundingListEndpoint = "https://formspree.io/f/xaeywoqk";
 
       if (form) {
         form.addEventListener("submit", async event => {
@@ -2353,7 +2379,7 @@
             return;
           }
 
-          if (recordCount >= 999) {
+          if (recordCount >= 99999) {
             formStatus.textContent =
               "The current Founding List is full. Please contact the Archive directly.";
             return;
@@ -2372,22 +2398,27 @@
               selectedInterests.length > 0
                 ? selectedInterests.join(", ")
                 : "Follow the Project",
+                subject: `New Founding List signup — ${firstName} ${lastName}`,
             submitted_at: new Date().toISOString()
           };
 
           try {
 
-            if (window.dataSdk && dataConnected) {
+            const response = await fetch(
+        "https://formspree.io/f/xaeywoqk",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(record)
+        }
+      );
 
-              const result = await window.dataSdk.create(record);
-
-              if (!result?.isOk) {
-                throw new Error("Data SDK could not save submission.");
-              }
-
-            } else {
-              console.log("Founding List submission:", record);
-            }
+      if (!response.ok) {
+        throw new Error("Form submission failed.");
+      }
 
             form.reset();
 
